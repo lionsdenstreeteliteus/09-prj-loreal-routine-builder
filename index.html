@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+  <head dir="ltr">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>L'Oréal | Smart Routine &amp; Product Advisor</title>
@@ -16,7 +16,18 @@
   </head>
 
   <body>
-    <div class="page-wrapper">
+    <button class="rtl-toggle" onclick="toggleRTL()">RTL</button>
+    <div class="page-wrapper" id="main-wrapper">
+      <script>
+        function toggleRTL() {
+          const html = document.documentElement;
+          if (html.getAttribute("dir") === "rtl") {
+            html.setAttribute("dir", "ltr");
+          } else {
+            html.setAttribute("dir", "rtl");
+          }
+        }
+      </script>
       <!------- Header / Branding ------->
       <header class="site-header">
         <img src="img/loreal-logo.png" alt="L'Oréal Logo" class="logo" />
@@ -25,6 +36,19 @@
 
       <!-- Category Filter -->
       <div class="search-section">
+        <input
+          id="productSearch"
+          type="text"
+          placeholder="Search products..."
+          style="
+            margin-bottom: 10px;
+            width: 100%;
+            padding: 10px 12px;
+            font-size: 15px;
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+          "
+        />
         <select id="categoryFilter">
           <option value="" disabled selected>Choose a Category</option>
           <option value="cleanser">Cleansers</option>
@@ -86,7 +110,6 @@
     </div>
 
     <!-- secrets.js can be removed when using Cloudflare Workers for API requests -->
-    <script src="secrets.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
